@@ -2,7 +2,7 @@
 
 A beautiful, mobile-responsive Streamlit web app that helps you split a bill with tip among multiple people — complete with glowing UI, interactive animations, and a clean result table.
 
-![Web App Live Link](https://bill-split-calculator-2025.streamlit.app/)
+[![Web App Live](https://img.shields.io/badge/Live%20App-Bill%20Split%20Calculator-brightgreen?style=for-the-badge&logo=streamlit)](https://bill-split-calculator-2025.streamlit.app/)
 
 ---
 
