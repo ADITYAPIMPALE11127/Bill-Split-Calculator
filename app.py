@@ -96,13 +96,17 @@ if submitted:
     st.table(df)
 
     pdf_buffer = generate_pdf(df)
-    st.download_button(
-        label="📄 Download Result as PDF",
-        data=pdf_buffer.getvalue(),
-        file_name="bill_details.pdf",
-        mime="application/pdf"
-    )
+    downloaded = st.download_button(
+    label="📄 Download Result as PDF",
+    data=pdf_buffer.getvalue(),
+    file_name="bill_details.pdf",
+    mime="application/pdf"
+)
 
+# Simulate download confirmation
+if downloaded:
+    st.toast("📥 PDF has been downloaded!", icon="✅")
+    
     if amount_per_person > 100:
         st.snow()
     elif amount_per_person < 10:
