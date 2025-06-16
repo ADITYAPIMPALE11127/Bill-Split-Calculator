@@ -52,19 +52,20 @@ st.markdown("""
 
 st.markdown("<h1>💸 Bill Split Calculator</h1>", unsafe_allow_html=True)
 
+# 🔢 Input Form
 with st.form("bill_form"):
     bill_amount = st.number_input("Enter the Bill Amount", min_value=0.0, format="%.2f")
     tip_percentage = st.slider("Tip Percentage", 0, 50, 10)
     count_person = st.number_input("How many people?", min_value=1, step=1)
     submitted = st.form_submit_button("✨ Calculate Split")
 
+# 📄 PDF Generation Function
 def generate_pdf(df):
     buffer = BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
 
     c.setFont("DejaVuSans", 16)
-    # c.drawString(200, height - 40, "Bill Split Details")
     c.drawString(200, height - 30, "Pay Karde Mittr 😂")
 
     c.setFont("DejaVuSans", 12)
@@ -77,6 +78,7 @@ def generate_pdf(df):
     buffer.seek(0)
     return buffer
 
+# ✅ Form Submission Logic
 if submitted:
     with st.spinner("Crunching numbers..."):
         time.sleep(1.2)
@@ -96,17 +98,20 @@ if submitted:
     st.table(df)
 
     pdf_buffer = generate_pdf(df)
-    downloaded = st.download_button(
-    label="📄 Download Result as PDF",
-    data=pdf_buffer.getvalue(),
-    file_name="bill_details.pdf",
-    mime="application/pdf"
-)
 
-# Simulate download confirmation
-if downloaded:
-    st.toast("📥 PDF has been downloaded!", icon="✅")
-    
+    # 📥 Download Button
+    downloaded = st.download_button(
+        label="📄 Download Result as PDF",
+        data=pdf_buffer.getvalue(),
+        file_name="bill_details.pdf",
+        mime="application/pdf"
+    )
+
+    # ✅ Toast on Download Click
+    if downloaded:
+        st.toast("📥 PDF has been downloaded!", icon="✅")
+
+    # 🎉 Reactions based on amount per person
     if amount_per_person > 100:
         st.snow()
     elif amount_per_person < 10:
@@ -114,7 +119,7 @@ if downloaded:
     else:
         st.toast("✅ Done splitting!", icon="🍰")
 
-# Footer
+# 📜 Footer
 st.markdown("""
     <footer>
         🚀 Made with ❤️ by <b>Aditya Pimpale</b>
